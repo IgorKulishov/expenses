@@ -1,0 +1,23 @@
+{
+  "name": "finances",
+  "version": "1.0.0",
+  "description": "financial budget and expense",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.3",
+    "express-session": "^1.15.4",
+    "gulp": "^3.9.1",
+    "mongoose": "^4.11.3",
+    "nodemon": "^1.11.0",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Igor K",
+  "license": "ISC"
+}
