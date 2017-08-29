@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute    } from '@angular/router';
 import { ExpensesService   } from '../../services/expenses.service';
-import { NgForm } from '@angular/forms';
+import { NgForm            } from '@angular/forms';
 
 @Component({
   templateUrl: './expenses.component.html',
@@ -18,23 +18,25 @@ export class ExpensesComponent implements OnInit {
   private sub: any;
   public successMessage: string;
   public errorMessage: string;
+  public title: any;
+  public details: any;
 
 
   //add new expenses for the user
   public submitNewExpenses (newEntryData: NgForm):any {
     this.expensesService.postNewExpense('ik', {
       expense: newEntryData.value.expense,
+      beneficiaryName: newEntryData.value.beneficiaryName,
       amount: newEntryData.value.amount,
       date: newEntryData.value.date}
     ).subscribe((res) => {
-      console.log('new entry data: ', res);
       this.expenses.push(JSON.parse(res._body));
       this.successMessage = 'New expenses were added';
-      newEntryData.value.expense = null;
-      newEntryData.value.amount = null;
-      newEntryData.value.date = null;
+      for(let i = 0; i< this.expenses.length; i++) {
+
+      }
     }, (err) => {
-      console.log('new entry err: ', err);
+      console.error('new entry err: ', err);
       this.errorMessage = 'Sorry, we are failed to add your new expenses';
     });
   }

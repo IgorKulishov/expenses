@@ -1,30 +1,45 @@
 <div class="container">
-  <div class="row">
-    <div class="col-12">
+  <!-- <div class="row"> -->
+    <!-- <div class="col-12"> -->
 
 		<h2>{{currentUser}}'s expenses</h2>
 
-		<div class="table-responsive">
-		    <table class="table table-striped">
+		<!-- <div class="table-responsive"> -->
+<!-- 		    <table class="table table-striped">
 		      <thead>
 				<tr>
 					<td><b>Expenses</b></td>
 					<td><b>Amounts</b></td>
 					<td><b>Dates</b></td>
 				</tr>
-		      </thead>
-		      <tbody>
-				<tr *ngFor="let expense of expenses">
-					<td>{{expense.beneficiaryName}}</td>
-					<td>{{expense.amountPaid}}</td>
-					<td>{{expense.dateOfPaiment}}</td>
-				</tr>
-		      </tbody>
-		    </table>
-		</div>
+		      </thead> -->
+		      <!-- <tbody> -->
+		      	<div *ngFor="let expense of expenses">
+					<accordion>
+					  <accordion-group #group>
+					    <div accordion-heading class="row">
+					    	<div class="col-3">{{expense.expenseName}}</div>
+					      	<div class="col-3">{{expense.beneficiaryName}}</div>
+							<div class="col-3">{{expense.amountPaid}}</div>
+							<div class="col-3">{{expense.dateOfPaiment}}</div>
+					      	<i class="pull-right float-xs-right glyphicon"
+					         [ngClass]="{'glyphicon-chevron-down': group?.isOpen, 'glyphicon-chevron-right': !group?.isOpen}"></i>
+					    </div>
+					    <div class="row">
+					    	<div class="col-3">{{expense.expenseName}}</div>
+					      	<div class="col-3">{{expense.beneficiaryName}}</div>
+							<div class="col-3">{{expense.amountPaid}}</div>
+							<div class="col-3">{{expense.dateOfPaiment}}</div>
+					    </div>
+					  </accordion-group> 
+					</accordion>
+				</div>
+		      <!-- </tbody> -->
+		    <!-- </table> -->
+		<!-- </div> -->
 
-    </div>
-  </div>
+    <!-- </div> -->
+  <!-- </div> -->
 </div>
 
 <div class="row">
@@ -33,6 +48,9 @@
 		<form class="form-signin" #newExpensesInputForm="ngForm" (ngSubmit)="submitNewExpenses(newExpensesInputForm)">
 	        <label for="expense" class="sr-only">Expense</label>
 		    <input type="text" id="expense" ngModel class="form-control input_space" placeholder="expense" required="" autofocus="" name="expense">
+
+		    <label for="beneficiaryName" class="sr-only">Expense</label>
+		    <input type="text" id="beneficiaryName" ngModel class="form-control input_space" placeholder="beneficiary name" required="" autofocus="" name="beneficiaryName">
 
 		    <label for="amount" class="sr-only">Amount</label>
 		    <input type="text" id="amount" ngModel class="form-control input_space" placeholder="amount" required="" name="amount">

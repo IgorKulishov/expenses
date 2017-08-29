@@ -79,10 +79,11 @@ var expensesRouters = function(){
 
 				if(req && req.params.username) {
 					newExpense = new ExpensesModel({
-						beneficiaryName : req.body.expense,
-						amountPaid : req.body.amount,
-						dateOfPaiment : req.body.date,
-						username: req.params.username
+						username: 		 req.params.username,
+						expenseName:     req.body.expense,
+						beneficiaryName: req.body.beneficiaryName,
+						amountPaid: 	 req.body.amount,
+						dateOfPaiment: 	 req.body.date
 					});
 					newExpense.save((err, newExpense) => {
 						if(err) {
