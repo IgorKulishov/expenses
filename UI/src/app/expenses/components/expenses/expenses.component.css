@@ -1,3 +1,7 @@
 .input_space {
 	margin: 5px 0 5px 0;
 }
+.details {
+	margin: 5px 0 5px 0;
+	border: dotted 1px #757575;
+}

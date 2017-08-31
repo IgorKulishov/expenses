@@ -14,22 +14,19 @@
 				</tr>
 		      </thead> -->
 		      <!-- <tbody> -->
-		      	<div *ngFor="let expense of expenses">
+		      	<div *ngFor="let expensesDetail of expensesDetails">
 					<accordion>
 					  <accordion-group #group>
 					    <div accordion-heading class="row">
-					    	<div class="col-3">{{expense.expenseName}}</div>
-					      	<div class="col-3">{{expense.beneficiaryName}}</div>
-							<div class="col-3">{{expense.amountPaid}}</div>
-							<div class="col-3">{{expense.dateOfPaiment}}</div>
+					    	<div class="col-3">{{expensesDetail.expenseName}}</div>
+
 					      	<i class="pull-right float-xs-right glyphicon"
 					         [ngClass]="{'glyphicon-chevron-down': group?.isOpen, 'glyphicon-chevron-right': !group?.isOpen}"></i>
 					    </div>
-					    <div class="row">
-					    	<div class="col-3">{{expense.expenseName}}</div>
-					      	<div class="col-3">{{expense.beneficiaryName}}</div>
-							<div class="col-3">{{expense.amountPaid}}</div>
-							<div class="col-3">{{expense.dateOfPaiment}}</div>
+					    <div class="row details" *ngFor="let detail of expensesDetail['details']">
+					      	<div class="col-3">{{detail.beneficiaryName}}</div>
+							<div class="col-3">{{detail.amountPaid}}</div>
+							<div class="col-3">{{detail.dateOfPaiment}}</div>
 					    </div>
 					  </accordion-group> 
 					</accordion>

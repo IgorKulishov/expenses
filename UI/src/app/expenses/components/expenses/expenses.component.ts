@@ -18,9 +18,7 @@ export class ExpensesComponent implements OnInit {
   private sub: any;
   public successMessage: string;
   public errorMessage: string;
-  public title: any;
-  public details: any;
-
+  public expensesDetails: any = [];
 
   //add new expenses for the user
   public submitNewExpenses (newEntryData: NgForm):any {
@@ -32,9 +30,10 @@ export class ExpensesComponent implements OnInit {
     ).subscribe((res) => {
       this.expenses.push(JSON.parse(res._body));
       this.successMessage = 'New expenses were added';
-      for(let i = 0; i< this.expenses.length; i++) {
+               
+    
 
-      }
+      
     }, (err) => {
       console.error('new entry err: ', err);
       this.errorMessage = 'Sorry, we are failed to add your new expenses';
@@ -48,6 +47,52 @@ export class ExpensesComponent implements OnInit {
       this.expensesService.getExpenses(this.currentUser)
           .subscribe((res) => {
             this.expenses = JSON.parse(res._body);
+
+ this.expensesDetails = [];
+
+      for (let i = 0; i < this.expenses.length; i++) {
+        if ( i == 0) {
+          this.expensesDetails.push(
+            {
+              expenseName: this.expenses[i].expenseName, 
+              details: [{
+                beneficiaryName: this.expenses[i].beneficiaryName, 
+                amountPaid:      this.expenses[i].amountPaid, 
+                dateOfPaiment:   this.expenses[i].dateOfPaiment
+              }]
+            }
+          );
+        } else {
+          if(!this.expensesDetails.find((nwinvt) => nwinvt.expenseName == this.expenses[i].expenseName)) {
+            this.expensesDetails.push(
+            {
+              expenseName: this.expenses[i].expenseName, 
+              details: [{
+                beneficiaryName: this.expenses[i].beneficiaryName, 
+                amountPaid:      this.expenses[i].amountPaid, 
+                dateOfPaiment:   this.expenses[i].dateOfPaiment
+              }]
+            }
+            );
+          } else {
+            this.expensesDetails.find((nwint, index) => {
+              if(nwint.expenseName == this.expenses[i].expenseName) {
+                  this.expensesDetails[index].details.push(
+                  {
+                      beneficiaryName: this.expenses[i].beneficiaryName, 
+                      amountPaid:      this.expenses[i].amountPaid, 
+                      dateOfPaiment:   this.expenses[i].dateOfPaiment
+                    }
+                  );
+              }
+            });
+          }
+        }
+      }
+
+      console.log('expensesDetails:', this.expensesDetails);
+
+
           });
     });
   }
